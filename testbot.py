@@ -27,26 +27,26 @@ scheduler = AsyncIOScheduler()
 # ฟังก์ชันแจ้งเตือน
 # ==========================
 async def send_alert(message: str, channel_id: int):
+    await bot.wait_until_ready()  # รอให้ bot พร้อม
     channel = bot.get_channel(channel_id)
     if channel:
         await channel.send(message)
+    else:
+        print(f"ไม่พบ channel ID {channel_id}")
 
 # ==========================
 # ฟังก์ชันทดสอบ ส่งทันที
 # ==========================
 async def send_test_alert():
     test_channel_id = 1445995017092202618  # ใส่ Channel ID ของคุณ
-    message = "นี่คือข้อความแจ้งเตือนทดสอบ! เวลาปัจจุบัน: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    message = f"นี่คือข้อความแจ้งเตือนทดสอบ! เวลาปัจจุบัน: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     await send_alert(message, test_channel_id)
 
 # ==========================
 # ฟังก์ชันแจ้งเตือนรายวัน
 # ==========================
 async def send_daily_alert():
-    # ตัวอย่าง: ข้อความจริงที่อยากแจ้ง
     daily_channel_id = 1445995017092202618  # ใส่ Channel ID ของคุณ
-    # ตัวอย่างดึงข้อมูลกิจกรรมจาก JSON หรือ DB
-    # กำหนด message เองตอนนี้
     message = "สวัสดี! นี่คือกิจกรรมที่กำลังจะหมดในวันนี้ (ตัวอย่าง)"
     await send_alert(message, daily_channel_id)
 
@@ -72,6 +72,7 @@ async def on_ready():
 @bot.command()
 async def now(ctx):
     await ctx.send(f"เวลาปัจจุบัน: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Command !now ถูกเรียกโดย {ctx.author}")
 
 # ==========================
 # Command: เทสกิจกรรม
@@ -80,6 +81,7 @@ async def now(ctx):
 async def test_events(ctx):
     await send_test_alert()
     await ctx.send("ทดสอบเรียบร้อย ✅")
+    print(f"Command !test_events ถูกเรียกโดย {ctx.author}")
 
 # ==========================
 # รัน bot
