@@ -1,9 +1,15 @@
+import os
 import json
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from discord.ext import commands, tasks
 
+# ดึง TOKEN จาก Environment Variable
+TOKEN = os.getenv("TOKEN")
+if TOKEN is None:
+    raise ValueError("TOKEN ไม่ได้ตั้งค่าใน Environment Variable!")
+    
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.default())
 
 # โหลด JSON
@@ -62,4 +68,6 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
     daily_check.start()
 
-bot.run("YOUR_DISCORD_TOKEN")
+# รัน bot
+bot.run(TOKEN)
+
