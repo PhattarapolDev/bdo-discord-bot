@@ -30,7 +30,7 @@ async def on_ready():
     scheduler.start()
 
 async def send_test_alert():
-    channel = bot.get_channel(YOUR_CHANNEL_ID)  # ใส่ Channel ID ที่ต้องการโพสต์
+    channel = bot.get_channel(1445995017092202618)  # ใส่ Channel ID ที่ต้องการโพสต์
     if channel:
         await channel.send("นี่คือข้อความแจ้งเตือนทดสอบ! เวลาปัจจุบัน: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
@@ -41,3 +41,4 @@ async def now(ctx):
 
 # รัน bot
 bot.run(TOKEN)
+
