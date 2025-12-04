@@ -46,7 +46,7 @@ async def send_test_alert():
 # ฟังก์ชันแจ้งเตือนรายวัน
 # ==========================
 async def send_daily_alert():
-    daily_channel_id = 1445995017092202618  # ใส่ Channel ID ของคุณ
+    daily_channel_id = 1425309010487279616  # ใส่ Channel ID ของคุณ
     message = "สวัสดี! นี่คือกิจกรรมที่กำลังจะหมดในวันนี้ (ตัวอย่าง)"
     await send_alert(message, daily_channel_id)
 
@@ -87,3 +87,4 @@ async def test_events(ctx):
 # รัน bot
 # ==========================
 bot.run(TOKEN)
+
